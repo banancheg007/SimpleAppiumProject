@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Enums;
 using SimpleAppiumProject.Core;
 using Xunit;
 
@@ -9,8 +10,11 @@ namespace SimpleAppiumProject.Tests
     {
         public SimpleWebAppTests()
         {
-            driverManager = new WebDriverManager();
-            driver = (AppiumDriver<IWebElement>)driverManager.CurrentDriver;
+            options.AddAdditionalCapability("deviceName", "AndoidEmulator");
+            options.AddAdditionalCapability("PlatformName", "Android");
+            options.AddAdditionalCapability(MobileCapabilityType.BrowserName, "chrome");
+            options.AddAdditionalCapability("chromedriverExecutable", @"C:/drivers/chromedriver.exe");
+            driver = (AppiumDriver<IWebElement>)driverManager.CurrentDriver(options);
         }
 
         [Fact]

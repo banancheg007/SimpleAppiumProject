@@ -6,15 +6,37 @@ using Xunit;
 
 namespace SimpleAppiumProject.Tests
 {
-    [Collection("Our Test Collection #1")]
+    [Collection("My Test Collection")]
     public abstract class BaseTests: IDisposable
     {
-        public BaseDriverManager driverManager;
+        protected bool disposed = false;
+
+        public DriverManager driverManager = new();
+        protected AppiumOptions options = new();
+
         public AppiumDriver<IWebElement> driver;
 
         public void Dispose()
         {
-            driverManager.Quit();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    driverManager.Quit();
+                }
+                disposed = true;
+            }
+        }
+
+        ~BaseTests()
+        {
+            Dispose(false);
         }
     }
 }

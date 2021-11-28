@@ -9,14 +9,17 @@ namespace SimpleAppiumProject.Tests
     {
         public SimpleNativeAppTests()
         {
-            driverManager = new NativeDriverManager();
-            driver = (AppiumDriver<IWebElement>)driverManager.CurrentDriver;
+            options.AddAdditionalCapability("deviceName", "AndoidEmulator");
+            options.AddAdditionalCapability("PlatformName", "Android");
+            options.AddAdditionalCapability("appPackage", "com.google.android.calculator");
+            options.AddAdditionalCapability("appActivity", "com.android.calculator2.Calculator");
+            driver = (AppiumDriver<IWebElement>)driverManager.CurrentDriver(options);
         }
         [Fact]
         public void NativeAppTest()
         {
             //Verify if the app is launched
-            Assert.NotNull(((AppiumDriver<IWebElement>)driverManager.CurrentDriver).Context);
+            Assert.NotNull(driver.Context);
 
             //get from resource-id field
             driver.FindElementById("digit_7").Click();
@@ -36,7 +39,7 @@ namespace SimpleAppiumProject.Tests
         public void NativeAppTest2()
         {
             //Verify if the app is launched
-            Assert.NotNull(((AppiumDriver<IWebElement>)driverManager.CurrentDriver).Context);
+            Assert.NotNull(driver.Context);
 
             //get from resource-id field
             driver.FindElementById("digit_7").Click();
