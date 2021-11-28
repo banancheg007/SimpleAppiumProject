@@ -11,15 +11,9 @@ using System.Threading.Tasks;
 
 namespace SimpleAppiumProject.Core
 {
-    public class WebDriverManager
+    public class WebDriverManager: BaseDriverManager
     {
-        protected AppiumDriver<IWebElement> driver;
-
-        private static readonly Lazy<WebDriverManager> lazy =
-             new Lazy<WebDriverManager>(() => new WebDriverManager());
-        public AppiumDriver<IWebElement> CurrentDriver => GetDriver();
-
-        public AppiumDriver<IWebElement> GetDriver()
+        public override AppiumDriver<IWebElement> GetDriver()
         {
             if (driver == null)
             {
@@ -41,30 +35,6 @@ namespace SimpleAppiumProject.Core
                 //driver.Url = url;
             }
             return driver;
-        }
-
-        public static WebDriverManager GetInstance()
-        {
-            return lazy.Value;
-        }
-
-        public string GetUrl()
-        {
-            return driver.Url;
-        }
-
-        public void Quit()
-        {
-
-            if (driver == null)
-                return;
-
-            else
-            {
-                driver.Quit();
-                driver = null;
-            }
-
         }
     }
 }

@@ -9,16 +9,9 @@ using System.Threading.Tasks;
 
 namespace SimpleAppiumProject.Core
 {
-    public class NativeDriverManager
+    public class NativeDriverManager: BaseDriverManager
     {
-        protected AppiumDriver<IWebElement> driver;
-
-        private static readonly Lazy<NativeDriverManager> lazy =
-             new Lazy<NativeDriverManager>(() => new NativeDriverManager());
-        public AppiumDriver<IWebElement> CurrentDriver => GetDriver();
-        
-
-        public AppiumDriver<IWebElement> GetDriver()
+        public override AppiumDriver<IWebElement> GetDriver()
         {
             if (driver == null)
             {
@@ -33,30 +26,6 @@ namespace SimpleAppiumProject.Core
                 //driver.Url = url;
             }
             return driver;
-        }
-
-        public static NativeDriverManager GetInstance()
-        {
-            return lazy.Value;
-        }
-
-        public string GetUrl()
-        {
-            return driver.Url;
-        }
-
-        public void Quit()
-        {
-
-            if (driver == null)
-                return;
-
-            else
-            {
-                driver.Quit();
-                driver = null;
-            }
-
         }
     }
 }

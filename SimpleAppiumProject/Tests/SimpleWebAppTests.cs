@@ -13,7 +13,7 @@ namespace SimpleAppiumProject.Tests
     [Collection("Our Test Collection #1")]
     public class SimpleWebAppTests: IDisposable
     {
-        WebDriverManager driverManager = WebDriverManager.GetInstance();
+        WebDriverManager driverManager = new WebDriverManager();
 
         public void Dispose()
         {

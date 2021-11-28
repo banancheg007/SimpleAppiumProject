@@ -13,7 +13,7 @@ namespace SimpleAppiumProject.Tests
     [Collection("Our Test Collection #1")]
     public class SimpleNativeAppTests: IDisposable
     {
-        NativeDriverManager driverManager = NativeDriverManager.GetInstance();
+        NativeDriverManager driverManager = new NativeDriverManager();
 
         public void Dispose()
         {
