@@ -1,30 +1,17 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using SimpleAppiumProject.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace SimpleAppiumProject.Tests
 {
-    [Collection("Our Test Collection #1")]
-    public class SimpleNativeAppTests: IDisposable
+    public class SimpleNativeAppTests: BaseTests
     {
-        readonly NativeDriverManager driverManager;
-        readonly AppiumDriver<IWebElement> driver;
         public SimpleNativeAppTests()
         {
             driverManager = new NativeDriverManager();
             driver = (AppiumDriver<IWebElement>)driverManager.CurrentDriver;
         }
-        public void Dispose()
-        {
-            driverManager.Quit();
-        }
-
         [Fact]
         public void NativeAppTest()
         {
