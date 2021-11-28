@@ -13,7 +13,7 @@ namespace SimpleAppiumProject.Core
 {
     public class WebDriverManager: BaseDriverManager
     {
-        public override AppiumDriver<IWebElement> GetDriver()
+        public override IWebDriver GetDriver()
         {
             if (driver == null)
             {

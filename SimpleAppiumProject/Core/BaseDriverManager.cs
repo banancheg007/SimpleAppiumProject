@@ -10,9 +10,9 @@ namespace SimpleAppiumProject.Core
 {
     abstract public class BaseDriverManager
     {
-        protected AppiumDriver<IWebElement> driver;
-        public AppiumDriver<IWebElement> CurrentDriver => GetDriver();
-        public abstract AppiumDriver<IWebElement> GetDriver();
+        protected IWebDriver driver;
+        public IWebDriver CurrentDriver => GetDriver();
+        public abstract IWebDriver GetDriver();
         public string GetUrl()
         {
             return driver.Url;

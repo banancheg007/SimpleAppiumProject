@@ -11,7 +11,7 @@ namespace SimpleAppiumProject.Core
 {
     public class NativeDriverManager: BaseDriverManager
     {
-        public override AppiumDriver<IWebElement> GetDriver()
+        public override IWebDriver GetDriver()
         {
             if (driver == null)
             {

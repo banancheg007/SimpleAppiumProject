@@ -13,28 +13,35 @@ namespace SimpleAppiumProject.Tests
     [Collection("Our Test Collection #1")]
     public class SimpleWebAppTests: IDisposable
     {
-        WebDriverManager driverManager = new WebDriverManager();
+        readonly WebDriverManager driverManager;
+        readonly AppiumDriver<IWebElement> driver;
 
         public void Dispose()
         {
             driverManager.Quit();
         }
 
+        public SimpleWebAppTests()
+        {
+            driverManager = new WebDriverManager();
+            driver = (AppiumDriver<IWebElement>)driverManager.CurrentDriver;
+        }
+
         [Fact]
         public void WebAppTest()
         {
-            driverManager.CurrentDriver.Navigate().GoToUrl("http://www.google.com");
+            driver.Navigate().GoToUrl("http://www.google.com");
 
-            driverManager.CurrentDriver.FindElementByCssSelector("input[name='q']").SendKeys("execute automation");
-            driverManager.CurrentDriver.FindElementByCssSelector("input[name='q']").SendKeys(Keys.Enter);
+            driver.FindElementByCssSelector("input[name='q']").SendKeys("execute automation");
+            driver.FindElementByCssSelector("input[name='q']").SendKeys(Keys.Enter);
         }
         [Fact]
         public void WebAppTest2()
         {
-            driverManager.CurrentDriver.Navigate().GoToUrl("http://www.google.com");
+            driver.Navigate().GoToUrl("http://www.google.com");
 
-            driverManager.CurrentDriver.FindElementByCssSelector("input[name='q']").SendKeys("execute automation");
-            driverManager.CurrentDriver.FindElementByCssSelector("input[name='q']").SendKeys(Keys.Enter);
+            driver.FindElementByCssSelector("input[name='q']").SendKeys("execute automation");
+            driver.FindElementByCssSelector("input[name='q']").SendKeys(Keys.Enter);
         }
     }
 }
