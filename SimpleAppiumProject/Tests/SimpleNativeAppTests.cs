@@ -13,8 +13,9 @@ namespace SimpleAppiumProject.Tests
             options.AddAdditionalCapability("PlatformName", "Android");
             options.AddAdditionalCapability("appPackage", "com.google.android.calculator");
             options.AddAdditionalCapability("appActivity", "com.android.calculator2.Calculator");
-            driver = (AppiumDriver<IWebElement>)driverManager.CurrentDriver(options);
+            driver = (AppiumDriver<IWebElement>)DriverManager.GetInstance().GetDriver(options);
         }
+
         [Fact]
         public void NativeAppTest()
         {

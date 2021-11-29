@@ -11,7 +11,8 @@ namespace SimpleAppiumProject.Tests
     {
         protected bool disposed = false;
 
-        public DriverManager driverManager = new();
+        protected Waits waits = new();
+
         protected AppiumOptions options = new();
 
         public AppiumDriver<IWebElement> driver;
@@ -28,7 +29,7 @@ namespace SimpleAppiumProject.Tests
             {
                 if (disposing)
                 {
-                    driverManager.Quit();
+                    DriverManager.GetInstance().Quit();
                 }
                 disposed = true;
             }

@@ -6,9 +6,11 @@ namespace SimpleAppiumProject.Core
 {
     public class DriverManager
     {
-        protected IWebDriver driver;
-        public IWebDriver CurrentDriver (DriverOptions driverOptions) => GetDriver(driverOptions);
-        public IWebDriver GetDriver(DriverOptions driverOptions)
+        static IWebDriver driver;
+        private static readonly Lazy<DriverManager> lazy =
+     new(() => new DriverManager());
+        public IWebDriver CurrentDriver (DriverOptions driverOptions = null) => GetDriver(driverOptions);
+        public IWebDriver GetDriver(DriverOptions driverOptions = null)
         {
             if (driver == null)
             {
@@ -32,7 +34,10 @@ namespace SimpleAppiumProject.Core
                 driver.Quit();
                 driver = null;
             }
-
+        }
+        public static DriverManager GetInstance()
+        {
+            return lazy.Value;
         }
     }
 }
