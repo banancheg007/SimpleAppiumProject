@@ -7,11 +7,11 @@ using Xunit;
 
 namespace SimpleAppiumProject.Tests
 {
-    public class SimpleWebAppTests: BaseTests
+    public class BitBucketTests : BaseTests
     {
-        readonly MainBucketPage mainBucketPage = new();
         readonly LoginPage loginPage = new();
-        public SimpleWebAppTests()
+        readonly PersonalPage personalPage = new();
+        public BitBucketTests()
         {
             options.AddAdditionalCapability("deviceName", "AndoidEmulator");
             options.AddAdditionalCapability("PlatformName", "Android");
@@ -21,39 +21,20 @@ namespace SimpleAppiumProject.Tests
         }
 
         [Fact]
-        public void WebAppTest()
-        {
-            driver.Navigate().GoToUrl("http://www.google.com");
-
-            driver.FindElementByCssSelector("input[name='q']").SendKeys("execute automation");
-            driver.FindElementByCssSelector("input[name='q']").SendKeys(Keys.Enter);
-        }
-        [Fact]
-        public void WebAppTest2()
-        {
-            driver.Navigate().GoToUrl("http://www.google.com");
-
-            driver.FindElementByCssSelector("input[name='q']").SendKeys("execute automation");
-            driver.FindElementByCssSelector("input[name='q']").SendKeys(Keys.Enter);
-        }
-
-        [Fact]
         public void LogInTest()
         {
-            driver.Navigate().GoToUrl(Constants.startUrl);
-            driver.FindElement(mainBucketPage.ToggleNavbarMenu).Click();
-            driver.FindElement(mainBucketPage.LogInButton).Click();
-            //Thread.Sleep(5000);
+            driver.Navigate().GoToUrl(Constants.startBitBucketUrl);
+            driver.FindElement(loginPage.ToggleNavbarMenu).Click();
+            driver.FindElement(loginPage.LogInButton).Click();
             waits.ElementIsVisible(loginPage.EmailField, driver);
             driver.FindElement(loginPage.EmailField).SendKeys(Constants.email);
             driver.FindElement(loginPage.ContinueButton).Click();
-            //Thread.Sleep(5000);
             waits.ElementIsVisible(loginPage.PasswordField, driver);
             driver.FindElement(loginPage.PasswordField).SendKeys(Constants.password);
             driver.FindElement(loginPage.ContinueButton).Click();
-
-            //driver.FindElementByCssSelector("input[name='q']").SendKeys("execute automation");
-            //driver.FindElementByCssSelector("input[name='q']").SendKeys(Keys.Enter);
+            waits.ElementIsVisible(personalPage.PullRequestsButton, driver);
+            Assert.True(driver.FindElement(personalPage.YourWorkButton).Displayed);
+            Assert.True(driver.FindElement(personalPage.YourWorkButton).Displayed);
         }
     }
 }
